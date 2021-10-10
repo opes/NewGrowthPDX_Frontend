@@ -16,16 +16,22 @@ export default function Navbar() {
             <div className="flex justify-between h-16">
               <div className="flex px-2 lg:px-0">
                 <div className="flex-shrink-0 flex items-center">
-                  <img
-                    className="block lg:hidden h-8 w-auto"
-                    src="https://res.cloudinary.com/mountaincloud/image/upload/v1633481874/New_Project_1_cfievf.png"
-                    alt="New Growth PDX"
-                  />
-                  <img
-                    className="hidden lg:block h-8 w-auto"
-                    src="https://res.cloudinary.com/mountaincloud/image/upload/v1633481874/New_Project_1_cfievf.png"
-                    alt="New Growth PDX"
-                  />
+                  <a href="/">
+                    <span className="sr-only">New Growth PDX</span>
+                    <img
+                      className="block lg:hidden h-8 w-auto"
+                      src="https://res.cloudinary.com/mountaincloud/image/upload/v1633481874/New_Project_1_cfievf.png"
+                      alt="New Growth PDX"
+                    />
+                  </a>
+                  <a href="/">
+                    <span className="sr-only">New Growth PDX</span>
+                    <img
+                      className="hidden lg:block h-8 w-auto"
+                      src="https://res.cloudinary.com/mountaincloud/image/upload/v1633481874/New_Project_1_cfievf.png"
+                      alt="New Growth PDX"
+                    />
+                  </a>
                 </div>
                 <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
                   <a
@@ -41,7 +47,7 @@ export default function Navbar() {
                     About
                   </a>
                   <a
-                    href="#"
+                    href="/"
                     className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     Contact
@@ -82,14 +88,15 @@ export default function Navbar() {
                 </Disclosure.Button>
               </div>
               <div className="hidden lg:ml-4 lg:flex lg:items-center">
-
                 <div className="flex-shrink-0">
-                  <button
-                    type="button"
-                    className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-green-600 shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-                  >
-                    <span>Sign Up</span>
-                  </button>
+                  <a href="/signup" className="text-gray-900">
+                    Sign Up
+                  </a>
+                </div>
+                <div className="flex-shrink-0">
+                  <a href="/login" className="text-gray-900 px-4">
+                    Login
+                  </a>
                 </div>
               </div>
             </div>
