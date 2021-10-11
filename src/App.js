@@ -10,10 +10,13 @@ import SignUp from './components/SignUp';
 
 import PlantGrid from './containers/PlantGrid';
 import GreenhouseGrid from './containers/GreenhouseGrid';
+import UploadContainer from './containers/UploadContainer';
+
 export default class App extends Component {
   render() {
     return (
       <Router>
+        {/* signup/login Nav */}
         <Navbar />
         <div>
           <Switch>
@@ -41,6 +44,11 @@ export default class App extends Component {
               path="/about"
               exact
               render={routerProps => <About {...routerProps} />}
+            />
+            <Route
+              path="/upload"
+              exact
+              render={routerProps => <UploadContainer {...routerProps} />}
             />
           </Switch>
         </div>

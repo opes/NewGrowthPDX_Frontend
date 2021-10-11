@@ -6,8 +6,8 @@ export default function Login() {
   const [password, setPassword] = useState('');
   const history = useHistory();
 
-  const onSubmitForm = async e => {
-    e.preventDefault();
+  const onSubmitForm = async (event) => {
+    event.preventDefault();
     try {
       const body = { email, password };
       console.log(email, password);
@@ -38,7 +38,7 @@ export default function Login() {
           Sign in to your account
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
-          Or{' '}
+          Or
           <a href="/signup" className="font-medium text-green-600 hover:text-green-500">
             signup for an account here.
           </a>
@@ -59,7 +59,7 @@ export default function Login() {
                 <input
                   id="email"
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={event => setEmail(event.target.value)}
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -80,7 +80,7 @@ export default function Login() {
                 <input
                   id="password"
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={event => setPassword(event.target.value)}
                   name="password"
                   type="password"
                   autoComplete="current-password"

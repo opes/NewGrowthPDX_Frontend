@@ -1,71 +1,76 @@
-// import React from 'react';
-// import Dropzone from 'react-dropzone';
-// import request from 'superagent';
-// import '../App.css';
+import React, { useState } from 'react';
 
-// const CLOUDINARY_UPLOAD_PRESET = 'adfda';
-// const CLOUDINARY_UPLOAD_URL =
-//   'https://api.cloudinary.com/v1_1/mountaincloud/image/upload';
+export default function Upload() {
+  const [fileInputState, setFileInputState] = useState('');
+  const [previewSource, setPreviewSource] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
+  const [successMsg, setSuccessMsg] = useState('');
+  const [errMsg, setErrMsg] = useState('');
 
-// export default class Upload extends React.Component {
-//   constructor(props) {
-//     super(props);
+  const handleFileInputChange = event => {
+    const file = event.target.files[0];
+    previewFile(file);
+    setSelectedFile(file);
+    setFileInputState(event.target.value);
+  };
 
-//     this.state = {
-//       uploadedFile: null,
-//       uploadedFileCloudinaryUrl: ''
-//     };
-//   }
+  const previewFile = file => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
 
-//   onImageDrop(files) {
-//     this.setState({
-//       uploadedFile: files[0]
-//     });
+  const handleSubmitFile = event => {
+    event.preventDefault();
+    if (!selectedFile) return;
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onloadend = () => {
+      uploadImage(reader.result);
+    };
+    reader.onerror = () => {
+      console.error('Oops!');
+      setErrMsg('something went wrong!');
+    };
+  };
 
-//     this.handleImageUpload(files[0]);
-//   }
-
-//   handleImageUpload(file) {
-//     let upload = request
-//       .post(CLOUDINARY_UPLOAD_URL)
-//       .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
-//       .field('file', file);
-
-//     upload.end((err, response) => {
-//       if (err) {
-//         console.error(err);
-//       }
-
-//       if (response.body.secure_url !== '') {
-//         this.setState({
-//           uploadedFileCloudinaryUrl: response.body.secure_url
-//         });
-//       }
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <form>
-//         <div className="FileUpload">
-//           <Dropzone
-//             onDrop={this.onImageDrop.bind(this)}
-//             multiple={false}
-//             accept="image/*"
-//           >
-//             <div>Drop an image or click to select a file to upload.</div>
-//           </Dropzone>
-//         </div>
-
-//         <div>
-//           {this.state.uploadedFileCloudinaryUrl === '' ? null : (
-//             <div>
-//               <p>{this.state.uploadedFile.name}</p>
-//               <img src={this.state.uploadedFileCloudinaryUrl} />
-//             </div>
-//           )}
-//         </div>
-//       </form>
-//     );
-//   }
-// }
+  const uploadImage = async base64EncodedImage => {
+    try {
+      await fetch('/upload', {
+        method: 'POST',
+        body: JSON.stringify({ data: base64EncodedImage }),
+        headers: { 'Content-Type': 'application/json' }
+      });
+      setFileInputState('');
+      setPreviewSource('');
+      setSuccessMsg('Image uploaded successfully');
+    } catch (err) {
+      console.error(err);
+      setErrMsg('Something went wrong!');
+    }
+  };
+  return (
+    <div>
+      <h1>Upload</h1>
+      <form onSubmit={handleSubmitFile}>
+        <input
+          id="fileInput"
+          type="file"
+          name="image"
+          onChange={handleFileInputChange}
+          value={fileInputState}
+        />
+        <button type="submit">Submit</button>
+      </form>
+      {previewSource && (
+        <img
+          src={previewSource}
+          alt="chosen image"
+          style={{ height: '300px' }}
+        />
+      )}
+    </div>
+  );
+}

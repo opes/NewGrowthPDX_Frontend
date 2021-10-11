@@ -3,7 +3,7 @@ import HomeHeader from '../components/HomeHeader';
 import HomePlantList from '../components/HomePlantList';
 
 
-export default class App extends Component {
+export default class PlantGrid extends Component {
   render() {
     return <>
     <HomeHeader />

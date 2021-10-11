@@ -7,8 +7,8 @@ export default function SignUp() {
   const [password, setPassword] = useState('');
   const history = useHistory();
 
-  const onSubmitForm = async e => {
-    e.preventDefault();
+  const onSubmitForm = async (event) => {
+    event.preventDefault();
     try {
       const body = { username, email, password };
       console.log(username, email, password);
@@ -17,6 +17,7 @@ export default function SignUp() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
+      setUsername('');
       setEmail('');
       setPassword('');
       return history.push('/greenhouse');
@@ -54,7 +55,7 @@ export default function SignUp() {
                 <input
                   id="username"
                   value={username}
-                  onChange={e => setUsername(e.target.value)}
+                  onChange={event => setUsername(event.target.value)}
                   name="username"
                   type="username"
                   autoComplete="username"
@@ -74,7 +75,7 @@ export default function SignUp() {
                 <input
                   id="email"
                   value={email}
-                  onChange={e => setEmail(e.target.value)}
+                  onChange={event => setEmail(event.target.value)}
                   name="email"
                   type="email"
                   autoComplete="email"
@@ -95,7 +96,7 @@ export default function SignUp() {
                 <input
                   id="password"
                   value={password}
-                  onChange={e => setPassword(e.target.value)}
+                  onChange={event => setPassword(event.target.value)}
                   name="password"
                   type="password"
                   autoComplete="current-password"

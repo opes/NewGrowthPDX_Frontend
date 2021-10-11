@@ -1,62 +1,62 @@
-import { MailIcon, PhoneIcon } from '@heroicons/react/solid';
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon, FilterIcon } from '@heroicons/react/solid'
+import { PlusIcon } from '@heroicons/react/solid';
+import { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { ChevronDownIcon, FilterIcon } from '@heroicons/react/solid';
 
 const filters = {
-    price: [
-      { value: '0', label: '$0 - $25', checked: false },
-      { value: '25', label: '$25 - $50', checked: false },
-      { value: '50', label: '$50 - $75', checked: false },
-      { value: '75', label: '$75+', checked: false },
-    ],
-    color: [
-      { value: 'white', label: 'White', checked: false },
-      { value: 'beige', label: 'Beige', checked: false },
-      { value: 'blue', label: 'Blue', checked: true },
-      { value: 'brown', label: 'Brown', checked: false },
-      { value: 'green', label: 'Green', checked: false },
-      { value: 'purple', label: 'Purple', checked: false },
-    ],
-    size: [
-      { value: 'xs', label: 'XS', checked: false },
-      { value: 's', label: 'S', checked: true },
-      { value: 'm', label: 'M', checked: false },
-      { value: 'l', label: 'L', checked: false },
-      { value: 'xl', label: 'XL', checked: false },
-      { value: '2xl', label: '2XL', checked: false },
-    ],
-    category: [
-      { value: 'all-new-arrivals', label: 'All New Arrivals', checked: false },
-      { value: 'tees', label: 'Tees', checked: false },
-      { value: 'objects', label: 'Objects', checked: false },
-      { value: 'sweatshirts', label: 'Sweatshirts', checked: false },
-      { value: 'pants-and-shorts', label: 'Pants & Shorts', checked: false },
-    ],
-  }
-  const sortOptions = [
-    { name: 'Most Popular', href: '#', current: true },
-    { name: 'Best Rating', href: '#', current: false },
-    { name: 'Newest', href: '#', current: false },
+  price: [
+    { value: '0', label: '$0 - $25', checked: false },
+    { value: '25', label: '$25 - $50', checked: false },
+    { value: '50', label: '$50 - $75', checked: false },
+    { value: '75', label: '$75+', checked: false }
+  ],
+  color: [
+    { value: 'white', label: 'White', checked: false },
+    { value: 'beige', label: 'Beige', checked: false },
+    { value: 'blue', label: 'Blue', checked: true },
+    { value: 'brown', label: 'Brown', checked: false },
+    { value: 'green', label: 'Green', checked: false },
+    { value: 'purple', label: 'Purple', checked: false }
+  ],
+  size: [
+    { value: 'xs', label: 'XS', checked: false },
+    { value: 's', label: 'S', checked: true },
+    { value: 'm', label: 'M', checked: false },
+    { value: 'l', label: 'L', checked: false },
+    { value: 'xl', label: 'XL', checked: false },
+    { value: '2xl', label: '2XL', checked: false }
+  ],
+  category: [
+    { value: 'all-new-arrivals', label: 'All New Arrivals', checked: false },
+    { value: 'tees', label: 'Tees', checked: false },
+    { value: 'objects', label: 'Objects', checked: false },
+    { value: 'sweatshirts', label: 'Sweatshirts', checked: false },
+    { value: 'pants-and-shorts', label: 'Pants & Shorts', checked: false }
   ]
+};
+const sortOptions = [
+  { name: 'Most Popular', href: '#', current: true },
+  { name: 'Best Rating', href: '#', current: false },
+  { name: 'Newest', href: '#', current: false }
+];
 
 const profile = {
   name: 'Test User',
   email: 'testuser@example.com',
   avatar:
     'https://res.cloudinary.com/mountaincloud/image/upload/v1633921006/shot-cropped-1590357847004_s5sqna.png',
-    backgroundImage:
+  backgroundImage:
     'https://images.unsplash.com/photo-1483794344563-d27a8d18014e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80',
   fields: [
     ['Email', 'testuser@example.com'],
-    ['Location', 'Portland'],
-
+    ['Location', 'Portland']
   ]
 };
 
 function classNames(...classes) {
-    return classes.filter(Boolean).join(' ')
-  }
+  return classes.filter(Boolean).join(' ');
+}
 
 export default function GreenhouseHeader() {
   return (
@@ -83,18 +83,17 @@ export default function GreenhouseHeader() {
                 {profile.name}
               </h1>
             </div>
-            <div className="mt-6 flex flex-col justify-stretch space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
-              <button
-                type="button"
-                className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-              >
-                <MailIcon
-                  className="-ml-1 mr-2 h-5 w-5 text-gray-400 border-green-800"
-                  aria-hidden="true"
-                />
-                <span>Message</span>
-              </button>
-            </div>
+            <Link to="/upload">
+              <div className="mt-6">
+                <button
+                  type="button"
+                  className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                >
+                  <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+                  Add a Plant
+                </button>
+              </div>
+            </Link>
           </div>
         </div>
         <div className="hidden sm:block md:hidden mt-6 min-w-0 flex-1">
@@ -104,8 +103,6 @@ export default function GreenhouseHeader() {
         </div>
       </div>
       <div>
-
-
         {/* Filters */}
         <Disclosure
           as="section"
