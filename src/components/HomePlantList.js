@@ -89,11 +89,8 @@ export default function HomePlantList() {
       const res = await fetch('https://ngpdx-backend.herokuapp.com/api/v1/plants');
       const json = await res.json();
 
-
-
       console.log('****LOOK HERE*****', json)
       setPlants(json);     
-
     }
     fetchPlants();
   }, []);
