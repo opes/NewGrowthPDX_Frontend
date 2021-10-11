@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { MailIcon } from '@heroicons/react/solid';
 
 const products = [
@@ -81,6 +82,16 @@ function classNames(...classes) {
 }
 
 export default function HomePlantList() {
+  // const [plants, setPlants] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchPlants = async () => {
+  //     const res = await fetch('https://ngpdx-backend.herokuapp.com/api/v1/plants');
+  //     setPlants(res.data);
+  //   }
+  //   fetchPlants();
+  // }, []);
+
   return (
     <div>
       <div className="max-w-7xl mx-auto overflow-hidden sm:px-6 lg:px-8">
