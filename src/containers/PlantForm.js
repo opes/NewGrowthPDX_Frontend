@@ -7,6 +7,27 @@ function classNames(...classes) {
 
 export default function PlantForm() {
   const [enabled, setEnabled] = useState(false);
+  const [image, setImage] = useState('');
+  const [url, setUrl] = useState('');
+
+
+  const uploadImage = () => {
+    const data = new FormData();
+    data.append('file', image);
+    data.append('upload_preset', 'zbeywvhn');
+    data.append('cloud_name', 'mountaincloud');
+    fetch('https://api.cloudinary.com/v1_1/mountaincloud/image/upload', {
+      method: 'post',
+      body: data
+    })
+      .then(resp => resp.json())
+      .then(data => {
+        setUrl(data.url);
+      })
+      .catch(err => console.log(err));
+  };
+
+
   return (
     <form className="space-y-8 divide-y divide-gray-200">
       <div className="space-y-8 divide-y divide-gray-200">
@@ -40,15 +61,15 @@ export default function PlantForm() {
                 />
               </Switch>
               <Switch.Label as="span" className="ml-3">
-                <span className="text-m font-medium text-gray-800">
-                  Offer?{' '}
+                <span className="text-sm font-medium text-gray-800">
+                  Market
                 </span>
               </Switch.Label>
             </Switch.Group>
 
             <div className="sm:col-span-6">
               <label
-                htmlFor="cover-photo"
+                htmlFor="plant-offer"
                 className="block text-sm font-medium text-gray-700"
               >
                 Add a photo of your plant
@@ -79,6 +100,7 @@ export default function PlantForm() {
                         id="file-upload"
                         name="file-upload"
                         type="file"
+                        onChange={event => setImage(event.target.files[0])}
                         className="sr-only"
                       />
                     </label>
@@ -87,6 +109,13 @@ export default function PlantForm() {
                   <p className="text-xs text-gray-500">
                     PNG, JPG, GIF up to 10MB
                   </p>
+                  <button
+                    type="button"
+                    onClick={uploadImage}
+                    className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                  >
+                    Upload
+                  </button>
                 </div>
               </div>
             </div>
@@ -147,6 +176,25 @@ export default function PlantForm() {
               <p className="mt-2 text-sm text-gray-500">
                 Write a few sentences about the plant.
               </p>
+            </div>
+
+            <div>
+              <label
+                htmlFor="location"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Category
+              </label>
+              <select
+                id="category"
+                name="category"
+                className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
+                defaultValue="Fern"
+              >
+                <option>Fern</option>
+                <option>Cacti</option>
+                <option>Air</option>
+              </select>
             </div>
           </div>
         </div>

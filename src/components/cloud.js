@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Axios from 'axios';
 
 function Cloud() {
     // const [loading, setLoading] = useState(false);
@@ -6,6 +7,9 @@ function Cloud() {
 
     const uploadImage = (files) => {
         console.log(files[0]);
+        const formData = new FormData()
+        formData.append('file', files[0])
+        formData.append('upload_preset', )
         // const files = event.target.files
         // const data = new FormData()
         // data.append('file', files[0])

@@ -38,7 +38,7 @@ const products = [
     href: '#'
   },
   {
-    id: 1,
+    id: 5,
     name: 'ZZ Plant',
     price: '$149',
     imageSrc:
@@ -47,7 +47,7 @@ const products = [
     href: '#'
   },
   {
-    id: 2,
+    id: 6,
     name: 'Sansevieria',
     price: '$15',
     imageSrc:
@@ -56,7 +56,7 @@ const products = [
     href: '#'
   },
   {
-    id: 3,
+    id: 7,
     name: 'Kimberly Queen Fern',
     price: '$15',
     imageSrc:
@@ -65,7 +65,7 @@ const products = [
     href: '#'
   },
   {
-    id: 4,
+    id: 8,
     name: 'Stromanthe Peacock',
     price: '$15',
     imageSrc:
