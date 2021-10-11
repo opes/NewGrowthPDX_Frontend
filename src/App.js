@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import Footer from './components/Footer';
 import Navbar from './components/Navbar';
-// import Home from './components/Home';
+import Footer from './components/Footer';
+
+import About from './containers/About';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 
+import PlantGrid from './containers/PlantGrid';
+import GreenhouseGrid from './containers/GreenhouseGrid';
 export default class App extends Component {
   render() {
     return (
@@ -14,6 +17,11 @@ export default class App extends Component {
         <Navbar />
         <div>
           <Switch>
+          <Route
+              path="/"
+              exact
+              render={routerProps => <PlantGrid {...routerProps} />}
+            />
             <Route
               path="/login"
               exact
@@ -23,6 +31,16 @@ export default class App extends Component {
               path="/signup"
               exact
               render={routerProps => <SignUp {...routerProps} />}
+            />
+            <Route
+              path="/greenhouse"
+              exact
+              render={routerProps => <GreenhouseGrid {...routerProps} />}
+            />
+            <Route
+              path="/about"
+              exact
+              render={routerProps => <About {...routerProps} />}
             />
           </Switch>
         </div>

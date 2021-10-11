@@ -1,11 +1,9 @@
 import { Fragment } from 'react';
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import { SearchIcon } from '@heroicons/react/solid';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+
 
 export default function Navbar() {
   return (
@@ -35,22 +33,22 @@ export default function Navbar() {
                 </div>
                 <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
                   <a
-                    href="#"
+                    href="/"
                     className="border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
-                    Categories
+                    New Growth PDX
                   </a>
                   <a
-                    href="#"
+                    href="/greenhouse"
+                    className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  >
+                    My Greenhouse
+                  </a>
+                  <a
+                    href="/about"
                     className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     About
-                  </a>
-                  <a
-                    href="/"
-                    className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
-                  >
-                    Contact
                   </a>
                 </div>
               </div>
