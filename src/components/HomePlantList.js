@@ -87,8 +87,12 @@ export default function HomePlantList() {
   useEffect(() => {
     const fetchPlants = async () => {
       const res = await fetch('https://ngpdx-backend.herokuapp.com/api/v1/plants');
-      console.log(res, 'response-------')
-      setPlants(res.body);
+      const json = await res.json();
+
+
+
+      console.log('****LOOK HERE*****', json)
+      setPlants(json);     
 
     }
     fetchPlants();
