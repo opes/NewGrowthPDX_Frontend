@@ -12,7 +12,7 @@ export default function SignUp() {
     try {
       const body = { username, email, password };
       console.log(username, email, password);
-      await fetch('https://ngpdx-backend.herokuapp.com/auth/signup', {
+      await fetch('http://localhost:3000/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)

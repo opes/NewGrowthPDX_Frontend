@@ -10,7 +10,7 @@ export default function HomePlantList() {
 
   useEffect(() => {
     const fetchPlants = async () => {
-      const res = await fetch('https://localhost:3000/api/v1/plants');
+      const res = await fetch('http://localhost:3000/api/v1/plants');
       const json = await res.json();
 
       setPlants(json);
