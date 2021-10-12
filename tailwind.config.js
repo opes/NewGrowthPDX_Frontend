@@ -5,7 +5,10 @@ module.exports = {
     extend: {},
   },
   variants: {
-    extend: {},
+    borderColor: ['hover', 'focus', 'active'],
+    extend: {
+
+    },
   },
   plugins: [
     require('@tailwindcss/aspect-ratio'),
