@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
-import { Switch } from '@headlessui/react';
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ');
-}
+import { Link } from 'react-router-dom';
 
 export default function PlantForm() {
-  const [enabled, setEnabled] = useState(false);
   const [image, setImage] = useState('');
   const [url, setUrl] = useState('');
+  // const [loggedUser, setLoggedUser] = useState('');
+
   const [plantName, setPlantName] = useState('');
   const [plantSciName, setPlantSciName] = useState('');
   const [plantDescription, setPlantDescription] = useState('');
+  const [plantPrice, setPlantPrice] = useState('');
   const [plantCategory, setPlantCategory] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('Tropical');
 
@@ -33,38 +31,77 @@ export default function PlantForm() {
 
   useEffect(() => {
     const fetchCategories = async () => {
-      const res = await fetch('https://ngpdx-backend.herokuapp.com/api/v1/categories');
+      const res = await fetch(
+        'https://ngpdx-backend.herokuapp.com/api/v1/categories'
+      );
       const json = await res.json();
 
-      console.log('****LOOK HERE FOR CATEGORIES*****', json)
-      setPlantCategory(json);     
-    }
-      fetchCategories();
+      console.log('****LOOK HERE FOR CATEGORIES*****', json);
+      setPlantCategory(json);
+    };
+    fetchCategories();
   }, []);
 
   const handlePlantNameChange = event => {
     setPlantName(event.target.value);
-  }
+  };
 
   const handleSciNameChange = event => {
     setPlantSciName(event.target.value);
-  }
+  };
 
   const handlePlantDescriptionChange = event => {
     setPlantDescription(event.target.value);
-  }
+  };
+
+  const handlePlantPriceChange = event => {
+    setPlantPrice(event.target.value);
+  };
 
   const handleCategoryChange = event => {
     setSelectedCategory(event.target.value);
-  }
+  };
 
-  const handlePlantSubmission = event => {
+  const handlePlantSubmission = async (event) => {
     event.preventDefault();
 
-  }
+    try {
+      // const formData = new FormData()
+      // formData.append('plant-name', plantName)
+      // formData.append('scientific-name', plantSciName)
+      // formData.append('description', plantDescription)
+      // formData.append('price', plantPrice)
+      // formData.append('category', selectedCategory)
+      // formData.append('file-upload', url)
+
+      await fetch('https://ngpdx-backend.herokuapp.com/api/v1/plants', {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type':'application/jSON' },
+        body: JSON.stringify({
+          plant_name: plantName,
+          scientific_name: plantSciName,
+          description: plantDescription,
+          price: plantPrice,
+          category_id: 5,
+          image: url,
+          user_id: '2',
+         })
+        // formData,
+      })
+
+      return alert('it worked!')
+
+    } catch(error) {
+      console.log(error)
+    }
+  };
 
   return (
-    <form onSubmit={handlePlantSubmission} className="space-y-8 divide-y divide-gray-200">
+    <form
+      onSubmit={handlePlantSubmission}
+      className="space-y-8 divide-y divide-gray-200"
+    >
       <div className="space-y-8 divide-y divide-gray-200">
         <div>
           <div>
@@ -78,30 +115,6 @@ export default function PlantForm() {
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-            <Switch.Group as="div" className="flex items-center">
-              <Switch
-                checked={enabled}
-                onChange={setEnabled}
-                className={classNames(
-                  enabled ? 'bg-green-600' : 'bg-gray-200',
-                  'relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500'
-                )}
-              >
-                <span
-                  aria-hidden="true"
-                  className={classNames(
-                    enabled ? 'translate-x-5' : 'translate-x-0',
-                    'pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200'
-                  )}
-                />
-              </Switch>
-              <Switch.Label as="span" className="ml-3">
-                <span className="text-sm font-medium text-gray-800">
-                  Market
-                </span>
-              </Switch.Label>
-            </Switch.Group>
-
             <div className="sm:col-span-6">
               <label
                 htmlFor="plant-offer"
@@ -113,7 +126,7 @@ export default function PlantForm() {
               <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
                 {url ? (
                   <>
-                    <img src={url} alt={'plant'} />
+                    <img src={url} alt={'this is a plant'} />
                     <input type="hidden" value={url} name="img-url" />
                   </>
                 ) : (
@@ -157,7 +170,7 @@ export default function PlantForm() {
                         onClick={uploadImage}
                         className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                       >
-                        Upload
+                        Save Photo
                       </button>
                     </div>
                   </>
@@ -167,7 +180,7 @@ export default function PlantForm() {
 
             <div className="sm:col-span-3">
               <label
-                htmlFor="username"
+                htmlFor="plant-name"
                 className="block text-sm font-medium text-gray-700"
               >
                 Plant Name
@@ -177,9 +190,8 @@ export default function PlantForm() {
                   onChange={handlePlantNameChange}
                   value={plantName}
                   type="text"
-                  name="username"
-                  id="username"
-                  autoComplete="username"
+                  name="plant-name"
+                  id="plant-name"
                   className="flex-1 focus:ring-green-500 focus:border-green-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                 />
               </div>
@@ -187,7 +199,7 @@ export default function PlantForm() {
 
             <div className="sm:col-span-3">
               <label
-                htmlFor="username"
+                htmlFor="scientific-name"
                 className="block text-sm font-medium text-gray-700"
               >
                 Scientific Name
@@ -198,9 +210,8 @@ export default function PlantForm() {
                   onChange={handleSciNameChange}
                   value={plantSciName}
                   type="text"
-                  name="username"
-                  id="username"
-                  autoComplete="username"
+                  name="scientific-name"
+                  id="scientific-name"
                   className="flex-1 focus:ring-green-500 focus:border-green-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
                 />
               </div>
@@ -208,7 +219,7 @@ export default function PlantForm() {
 
             <div className="sm:col-span-6">
               <label
-                htmlFor="about"
+                htmlFor="description"
                 className="block text-sm font-medium text-gray-700"
               >
                 Description
@@ -217,8 +228,8 @@ export default function PlantForm() {
                 <textarea
                   onChange={handlePlantDescriptionChange}
                   value={plantDescription}
-                  id="about"
-                  name="about"
+                  id="description"
+                  name="description"
                   rows={3}
                   className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border border-gray-300 rounded-md"
                 />
@@ -226,6 +237,26 @@ export default function PlantForm() {
               <p className="mt-2 text-sm text-gray-500">
                 Write a few sentences about the plant.
               </p>
+            </div>
+
+            <div className="sm:col-span-1">
+              <label
+                htmlFor="price"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Price ($USD)
+              </label>
+              <div className="mt-1 flex rounded-md shadow-sm">
+                <input
+                  onChange={handlePlantPriceChange}
+                  value={plantPrice}
+                  type="number"
+                  min="0.00"
+                  name="price"
+                  id="price"
+                  className="flex-1 focus:ring-green-500 focus:border-green-500 block w-full min-w-0 rounded-none rounded-r-md sm:text-sm border-gray-300"
+                />
+              </div>
             </div>
 
             <div>
@@ -243,10 +274,11 @@ export default function PlantForm() {
                 name="category"
                 className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
               >
-              {plantCategory.map((category) => (
-                <option key={category.id} value={category.name}>{category.name}</option>
-              ))}
-
+                {plantCategory.map(category => (
+                  <option key={category.id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
               </select>
             </div>
           </div>
@@ -255,17 +287,21 @@ export default function PlantForm() {
 
       <div className="pt-5">
         <div className="flex justify-end">
-          <button
-            type="button"
-            className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-          >
-            Cancel
-          </button>
+          <Link to="/greenhouse">
+          <div className="flex justify-end">
+              <button
+                type="button"
+                className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+              >
+                Cancel
+              </button>
+            </div>
+          </Link>
           <button
             type="submit"
             className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
           >
-            Save
+            Submit
           </button>
         </div>
       </div>
