@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Switch } from '@headlessui/react';
 
 function classNames(...classes) {
@@ -9,6 +9,11 @@ export default function PlantForm() {
   const [enabled, setEnabled] = useState(false);
   const [image, setImage] = useState('');
   const [url, setUrl] = useState('');
+  const [plantName, setPlantName] = useState('');
+  const [plantSciName, setPlantSciName] = useState('');
+  const [plantDescription, setPlantDescription] = useState('');
+  const [plantCategory, setPlantCategory] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('Tropical');
 
   const uploadImage = () => {
     const data = new FormData();
@@ -26,8 +31,40 @@ export default function PlantForm() {
       .catch(err => console.log(err));
   };
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const res = await fetch('https://ngpdx-backend.herokuapp.com/api/v1/categories');
+      const json = await res.json();
+
+      console.log('****LOOK HERE FOR CATEGORIES*****', json)
+      setPlantCategory(json);     
+    }
+      fetchCategories();
+  }, []);
+
+  const handlePlantNameChange = event => {
+    setPlantName(event.target.value);
+  }
+
+  const handleSciNameChange = event => {
+    setPlantSciName(event.target.value);
+  }
+
+  const handlePlantDescriptionChange = event => {
+    setPlantDescription(event.target.value);
+  }
+
+  const handleCategoryChange = event => {
+    setSelectedCategory(event.target.value);
+  }
+
+  const handlePlantSubmission = event => {
+    event.preventDefault();
+
+  }
+
   return (
-    <form className="space-y-8 divide-y divide-gray-200">
+    <form onSubmit={handlePlantSubmission} className="space-y-8 divide-y divide-gray-200">
       <div className="space-y-8 divide-y divide-gray-200">
         <div>
           <div>
@@ -137,6 +174,8 @@ export default function PlantForm() {
               </label>
               <div className="mt-1 flex rounded-md shadow-sm">
                 <input
+                  onChange={handlePlantNameChange}
+                  value={plantName}
                   type="text"
                   name="username"
                   id="username"
@@ -151,11 +190,13 @@ export default function PlantForm() {
                 htmlFor="username"
                 className="block text-sm font-medium text-gray-700"
               >
-                Scientific Name{' '}
+                Scientific Name
                 <span className="mt-2 text-sm text-gray-500">(optional)</span>
               </label>
               <div className="mt-1 flex rounded-md shadow-sm">
                 <input
+                  onChange={handleSciNameChange}
+                  value={plantSciName}
                   type="text"
                   name="username"
                   id="username"
@@ -174,11 +215,12 @@ export default function PlantForm() {
               </label>
               <div className="mt-1">
                 <textarea
+                  onChange={handlePlantDescriptionChange}
+                  value={plantDescription}
                   id="about"
                   name="about"
                   rows={3}
                   className="shadow-sm focus:ring-green-500 focus:border-green-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                  defaultValue={''}
                 />
               </div>
               <p className="mt-2 text-sm text-gray-500">
@@ -188,20 +230,23 @@ export default function PlantForm() {
 
             <div>
               <label
-                htmlFor="location"
+                htmlFor="category"
                 className="block text-sm font-medium text-gray-700"
               >
                 Category
               </label>
               <select
+                onChange={handleCategoryChange}
+                value={selectedCategory}
+                multiple={false}
                 id="category"
                 name="category"
                 className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-green-500 focus:border-green-500 sm:text-sm rounded-md"
-                defaultValue="Fern"
               >
-                <option>Fern</option>
-                <option>Cacti</option>
-                <option>Air</option>
+              {plantCategory.map((category) => (
+                <option key={category.id} value={category.name}>{category.name}</option>
+              ))}
+
               </select>
             </div>
           </div>
