@@ -62,7 +62,9 @@ export default function PlantForm() {
     setSelectedCategory(event.target.value);
   };
 
-  const handlePlantSubmission = async () => {
+  const handlePlantSubmission = async (event) => {
+    event.preventDefault();
+
     try {
       // const formData = new FormData()
       // formData.append('plant-name', plantName)
@@ -168,7 +170,7 @@ export default function PlantForm() {
                         onClick={uploadImage}
                         className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-full shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                       >
-                        Upload
+                        Save Photo
                       </button>
                     </div>
                   </>
