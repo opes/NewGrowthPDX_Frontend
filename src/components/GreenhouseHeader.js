@@ -1,8 +1,9 @@
 import { PlusIcon } from '@heroicons/react/solid';
-import { Fragment } from 'react';
+import React, { Fragment, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FilterIcon } from '@heroicons/react/solid';
+import { useUser, UserContext } from '../hooks/UserProvider.js';
 
 const filters = {
   price: [
@@ -35,6 +36,7 @@ const filters = {
     { value: 'pants-and-shorts', label: 'Pants & Shorts', checked: false }
   ]
 };
+
 const sortOptions = [
   { name: 'Most Popular', href: '#', current: true },
   { name: 'Newest', href: '#', current: false }
@@ -58,6 +60,11 @@ function classNames(...classes) {
 }
 
 export default function GreenhouseHeader() {
+//const { user } = useUser();
+  const { user } = useContext(UserContext);
+  
+  console.log('GREENHOUSE USER', user);
+
   return (
     <div>
       <div>
@@ -79,7 +86,7 @@ export default function GreenhouseHeader() {
           <div className="mt-6 sm:flex-1 sm:min-w-0 sm:flex sm:items-center sm:justify-end sm:space-x-6 sm:pb-1">
             <div className="sm:hidden md:block mt-6 min-w-0 flex-1">
               <h1 className="text-2xl font-bold text-gray-900 truncate">
-                {profile.name}
+                {user}
               </h1>
             </div>
             <Link to="/upload">

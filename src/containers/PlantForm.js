@@ -74,9 +74,10 @@ export default function PlantForm() {
       // formData.append('category', selectedCategory)
       // formData.append('file-upload', url)
 
-      await fetch('https://ngpdx-backend.herokuapp.com/api/v1/plants', {
+      await fetch('http://localhost:3000/api/v1/plants', {
         method: 'POST',
         credentials: 'include',
+        mode: 'cors',
         headers: { 'Content-Type':'application/jSON' },
         body: JSON.stringify({
           plant_name: plantName,
@@ -84,8 +85,9 @@ export default function PlantForm() {
           description: plantDescription,
           price: plantPrice,
           category_id: 5,
+          on_market: true,
           image: url,
-          user_id: '2',
+          users_id: '2',
          })
         // formData,
       })
