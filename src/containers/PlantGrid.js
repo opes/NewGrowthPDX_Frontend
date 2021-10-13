@@ -1,13 +1,12 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HomeHeader from '../components/HomeHeader';
 import HomePlantList from '../components/HomePlantList';
 
-
-export default class PlantGrid extends Component {
-  render() {
-    return <>
-    <HomeHeader />
-    <HomePlantList />
-    </>;
-  }
+export default function PlantGrid() {
+  return (
+    <>
+      <HomeHeader />
+      <HomePlantList />
+    </>
+  );
 }
