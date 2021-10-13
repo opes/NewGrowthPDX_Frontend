@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 export default function PlantForm() {
   const [image, setImage] = useState('');
   const [url, setUrl] = useState('');
-  // const [loggedUser, setLoggedUser] = useState('');
+  const history = useHistory();
 
   const [plantName, setPlantName] = useState('');
   const [plantSciName, setPlantSciName] = useState('');
@@ -66,15 +67,7 @@ export default function PlantForm() {
     event.preventDefault();
 
     try {
-      // const formData = new FormData()
-      // formData.append('plant-name', plantName)
-      // formData.append('scientific-name', plantSciName)
-      // formData.append('description', plantDescription)
-      // formData.append('price', plantPrice)
-      // formData.append('category', selectedCategory)
-      // formData.append('file-upload', url)
-
-      await fetch('http://localhost:3000/api/v1/plants', {
+      await fetch('https://ngpdx-backend.herokuapp.com/api/v1/plants', {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -89,10 +82,8 @@ export default function PlantForm() {
           image: url,
           users_id: '2',
          })
-        // formData,
       })
-
-      return alert('it worked!')
+      return history.push('/greenhouse');
 
     } catch(error) {
       console.log(error)

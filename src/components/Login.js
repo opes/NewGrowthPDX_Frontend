@@ -1,12 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserContext, useUser } from '../hooks/UserProvider';
+import { UserContext } from '../hooks/UserProvider';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-//const { user, setUser } = useUser()
   const { setUser } = useContext(UserContext);
 
   const onSubmitForm = async (event) => {
@@ -14,24 +13,24 @@ export default function Login() {
     try {
       const body = { email, password };
       console.log(email, password);
-      
-      const res = await fetch('http://localhost:3000/auth/login', {
+
+      const res = await fetch('https://ngpdx-backend.herokuapp.com/auth/login', {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
-      
+
       const json = await res.json();
-      setUser(json.username)
+      setUser(json)
       console.log('JSON LOGGING---->', json);
       setEmail('');
       setPassword('');
-      
+
       return history.push('/greenhouse');
     } catch (error) {
-      
+
       console.log(error.message);
     }
   };

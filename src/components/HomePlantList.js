@@ -1,18 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { MailIcon } from '@heroicons/react/solid';
 
-// function classNames(...classes) {
-//   return classes.filter(Boolean).join(' ');
-// }
-
 export default function HomePlantList() {
   const [plants, setPlants] = useState([]);
 
   useEffect(() => {
     const fetchPlants = async () => {
-      const res = await fetch('http://localhost:3000/api/v1/plants');
+      const res = await fetch('https://ngpdx-backend.herokuapp.com/api/v1/plants');
       const json = await res.json();
-
       setPlants(json);
     }
     fetchPlants();

@@ -2,8 +2,7 @@ import { Fragment } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { SearchIcon } from '@heroicons/react/solid';
 import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline';
-
-
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
   return (
@@ -14,42 +13,42 @@ export default function Navbar() {
             <div className="flex justify-between h-16">
               <div className="flex px-2 lg:px-0">
                 <div className="flex-shrink-0 flex items-center">
-                  <a href="/">
+                  <Link to={'/'}>
                     <span className="sr-only">New Growth PDX</span>
                     <img
                       className="block lg:hidden h-8 w-auto"
                       src="https://res.cloudinary.com/mountaincloud/image/upload/v1633481874/New_Project_1_cfievf.png"
                       alt="New Growth PDX"
                     />
-                  </a>
-                  <a href="/">
+                  </Link>
+                  <Link to={'/'}>
                     <span className="sr-only">New Growth PDX</span>
                     <img
                       className="hidden lg:block h-8 w-auto"
                       src="https://res.cloudinary.com/mountaincloud/image/upload/v1633481874/New_Project_1_cfievf.png"
                       alt="New Growth PDX"
                     />
-                  </a>
+                  </Link>
                 </div>
                 <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
-                  <a
-                    href="/"
+                  <Link
+                    to={'/'}
                     className="border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     New Growth PDX
-                  </a>
-                  <a
-                    href="/greenhouse"
-                    className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  </Link>
+                  <Link
+                    to={'/greenhouse'}
+                    className="border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     My Greenhouse
-                  </a>
-                  <a
-                    href="/about"
-                    className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                  </Link>
+                  <Link
+                    to={'/about'}
+                    className="border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     About
-                  </a>
+                  </Link>
                 </div>
               </div>
               <div className="flex-1 flex items-center justify-center px-2 lg:ml-6 lg:justify-end">
@@ -87,14 +86,14 @@ export default function Navbar() {
               </div>
               <div className="hidden lg:ml-4 lg:flex lg:items-center">
                 <div className="flex-shrink-0">
-                  <a href="/signup" className="text-gray-900">
+                  <Link to={'/signup'} className="text-gray-900">
                     Sign Up
-                  </a>
+                  </Link>
                 </div>
                 <div className="flex-shrink-0">
-                  <a href="/login" className="text-gray-900 px-4">
+                  <Link to={'/login'} className="text-gray-900 px-4">
                     Login
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
