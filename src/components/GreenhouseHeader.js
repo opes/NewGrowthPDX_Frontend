@@ -71,7 +71,7 @@ export default function GreenhouseHeader() {
                 {user.username}
               </h1>
             </div>
-            <Link to="/upload">
+            <Link to="/list-plant">
               <div className="mt-6">
                 <button
                   type="button"

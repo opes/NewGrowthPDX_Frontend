@@ -1,23 +1,23 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { MailIcon } from '@heroicons/react/solid';
-import { UserContext } from '../hooks/UserProvider.js';
 
 
-export default function GreenhouseList() {
-  const { user } = useContext(UserContext);
+export default function GreenhouseList({ loggedUser }) {
+
   const [plants, setPlants] = useState([]);
 
   useEffect(() => {
     const fetchUserPlants = async () => {
-      const res = await fetch(`https://ngpdx-backend.herokuapp.com/api/v1/greenhouse/${user.id}`);
+      const res = await fetch(
+        `https://ngpdx-backend.herokuapp.com/api/v1/greenhouse/${loggedUser}`
+      );
       const json = await res.json();
-console.log(json, 'HERE I AM')
-      if(!json.length) return;
+      if (!json.length) return;
       setPlants(json);
-    }
+    };
     fetchUserPlants();
   }, []);
-
 
   return (
     <div>
@@ -25,7 +25,7 @@ console.log(json, 'HERE I AM')
         <h2 className="sr-only">Greenhouse Plants</h2>
 
         <div className="-mx-px border-l border-gray-200 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-          {plants.map((plant) => (
+          {plants.map(plant => (
             <div
               key={plant.id}
               className="group relative p-4 border-r border-b border-gray-200 sm:p-6"
@@ -39,10 +39,10 @@ console.log(json, 'HERE I AM')
               </div>
               <div className="pt-2 pb-2 text-center">
                 <h3 className="py-1 text-sm font-medium text-gray-900">
-                  <a href={plant.href}>
+                  <Link to={`/plant/${plant.id}`}>
                     <span aria-hidden="true" className="absolute inset-0" />
                     {plant.plant_name}
-                  </a>
+                  </Link>
                 </h3>
 
                 <p className="mb-2 font-medium text-gray-900">{plant.price}</p>

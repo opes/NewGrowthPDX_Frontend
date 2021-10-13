@@ -44,7 +44,7 @@ export default function Navbar() {
                     My Greenhouse
                   </Link>
                   <Link
-                    to={'/about'}
+                    to={'/plant'}
                     className="border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     About
