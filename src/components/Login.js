@@ -1,12 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../hooks/UserProvider';
+import { useUser } from '../hooks/UserProvider';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useUser();
 
   const onSubmitForm = async (event) => {
     event.preventDefault();
@@ -24,8 +24,6 @@ export default function Login() {
 
       const json = await res.json();
       setUser(json)
-      localStorage.setItem('token', JSON.stringify(json.id))
-      console.log('JSON LOGGING---->', json);
       setEmail('');
       setPassword('');
 

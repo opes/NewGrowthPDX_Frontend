@@ -1,13 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { UserContext } from '../hooks/UserProvider';
+import { useUser } from '../hooks/UserProvider';
 
 export default function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
-  const { setUser } = useContext(UserContext);
+  const { setUser } = useUser();
 
   const onSubmitForm = async (event) => {
     event.preventDefault();
