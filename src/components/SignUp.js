@@ -1,25 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
+import { UserContext } from '../hooks/UserProvider';
 
 export default function SignUp() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const history = useHistory();
+  const { setUser } = useContext(UserContext);
 
   const onSubmitForm = async (event) => {
     event.preventDefault();
     try {
       const body = { username, email, password };
       console.log(username, email, password);
-      await fetch('http://localhost:3000/auth/signup', {
+
+      const res = await fetch('https://ngpdx-backend.herokuapp.com/auth/signup', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body)
       });
+      const json = await res.json();
       setUsername('');
       setEmail('');
       setPassword('');
+      setUser(json.username, json.id)
       return history.push('/greenhouse');
     } catch (error) {
       console.log(error.message);
