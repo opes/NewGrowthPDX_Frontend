@@ -25,7 +25,7 @@ export default function SignUp() {
       setEmail('');
       setPassword('');
       setUser(json.username, json.id)
-      return history.push('/greenhouse');
+      return history.push('/login');
     } catch (error) {
       console.log(error.message);
     }

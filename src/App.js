@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
@@ -12,10 +12,9 @@ import PlantGrid from './containers/PlantGrid';
 import GreenhouseGrid from './containers/GreenhouseGrid';
 import UploadContainer from './containers/UploadContainer';
 import PlantDetail from './components/PlantDetail';
+import PlantBuyerDetail from './components/PlantBuyerDetail';
 
 export default function App() {
-
-
 
   return (
     <Router>
@@ -42,6 +41,9 @@ export default function App() {
           </Route>
           <Route path="/plant/:id" exact>
             <PlantDetail />
+          </Route>
+          <Route path="/plants/:id" exact>
+            <PlantBuyerDetail />
           </Route>
         </Switch>
       </div>
