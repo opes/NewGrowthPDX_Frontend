@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams, Link, useHistory } from 'react-router-dom';
-// import { useUser } from '../hooks/UserProvider.js';
+import { useParams, Link } from 'react-router-dom';
+import { MailIcon } from '@heroicons/react/solid';
+import { useUser } from '../hooks/UserProvider.js';
 
-export default function PlantDetail() {
+export default function PlantBuyerDetail() {
+  const { user } = useUser();
   const [plants, setPlants] = useState({});
-  const history = useHistory();
-  // const { user } = useUser();
   const { id } = useParams();
+  const [mailPreview, setMailPreview] = useState('');
 
   useEffect(() => {
     const fetchPlantDetail = async (plantID) => {
@@ -22,17 +23,39 @@ export default function PlantDetail() {
     fetchPlantDetail(id);
   }, []);
 
-  const deletePlant = async (id) => {
-    await fetch(
-      `https://ngpdx-backend.herokuapp.com/api/v1/plants/${id}`,
-      {
-        method: 'DELETE',
-        credentials: 'include',
-        mode: 'cors'
-      }
-    );
-    return history.push('/greenhouse');
+
+  const sendEmail = async (plantId, email) => {
+    try {
+      const res = await fetch(
+        'https://ngpdx-backend.herokuapp.com/api/v1/mailer',
+        {
+          method: 'POST',
+          credentials: 'include',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            plantId: plantId,
+            fromEmail: email
+          })
+      });
+      const json = await res.json();
+      return json;
+
+    } catch (error) {
+      console.log(error.message);
+    }
   };
+
+  const handleEmail = async () => {
+    const res = await sendEmail(id , user.email)
+
+    setMailPreview(res.mailPreview);
+    window.open(res.mailPreview)
+
+    if(res.mailPreview) return alert("Email sent!")
+    else return alert("Email did not correctly send")
+  }
+
 
   return (
     <div className="bg-white">
@@ -74,12 +97,13 @@ export default function PlantDetail() {
       <div className="ml-60">
         <button
           type="button"
-          onClick={()=> deletePlant(id)}
+          onClick={() => {handleEmail()}}
           className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
         >
-          delete
+          <MailIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+          Email User
         </button>
-        <Link to={'/greenhouse'} className="text-gray-900 px-4">
+        <Link to={'/'} className="text-gray-900 px-4">
           Go Back
         </Link>
       </div>

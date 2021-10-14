@@ -8,28 +8,30 @@ export default function Login() {
   const history = useHistory();
   const { setUser } = useUser();
 
-  const onSubmitForm = async (event) => {
+  const onSubmitForm = async event => {
     event.preventDefault();
     try {
       const body = { email, password };
       console.log(email, password);
 
-      const res = await fetch('https://ngpdx-backend.herokuapp.com/auth/login', {
-        method: 'POST',
-        credentials: 'include',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
+      const res = await fetch(
+        'https://ngpdx-backend.herokuapp.com/auth/login',
+        {
+          method: 'POST',
+          credentials: 'include',
+          mode: 'cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }
+      );
 
       const json = await res.json();
-      setUser(json)
+      setUser(json);
       setEmail('');
       setPassword('');
 
       return history.push('/greenhouse');
     } catch (error) {
-
       console.log(error.message);
     }
   };
@@ -49,7 +51,10 @@ export default function Login() {
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Or {''}
-          <a href="/signup" className="font-medium text-green-600 hover:text-green-500">
+          <a
+            href="/signup"
+            className="font-medium text-green-600 hover:text-green-500"
+          >
             signup for an account here.
           </a>
         </p>
