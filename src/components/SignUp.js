@@ -9,22 +9,25 @@ export default function SignUp() {
   const history = useHistory();
   const { setUser } = useUser();
 
-  const onSubmitForm = async (event) => {
+  const onSubmitForm = async event => {
     event.preventDefault();
     try {
       const body = { username, email, password };
       console.log(username, email, password);
 
-      const res = await fetch('https://ngpdx-backend.herokuapp.com/auth/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
-      });
+      const res = await fetch(
+        'https://ngpdx-backend.herokuapp.com/auth/signup',
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(body)
+        }
+      );
       const json = await res.json();
       setUsername('');
       setEmail('');
       setPassword('');
-      setUser(json.username, json.id)
+      setUser(json.username, json.id);
       return history.push('/login');
     } catch (error) {
       console.log(error.message);
@@ -49,7 +52,7 @@ export default function SignUp() {
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
           <form className="space-y-6" onSubmit={onSubmitForm} method="POST">
-          <div>
+            <div>
               <label
                 htmlFor="username"
                 className="block text-sm font-medium text-gray-700"

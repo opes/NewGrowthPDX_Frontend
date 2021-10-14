@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import { MailIcon } from '@heroicons/react/solid';
 import { Link } from 'react-router-dom';
 
@@ -7,10 +7,12 @@ export default function HomePlantList() {
 
   useEffect(() => {
     const fetchPlants = async () => {
-      const res = await fetch('https://ngpdx-backend.herokuapp.com/api/v1/plants');
+      const res = await fetch(
+        'https://ngpdx-backend.herokuapp.com/api/v1/plants'
+      );
       const json = await res.json();
       setPlants(json);
-    }
+    };
     fetchPlants();
   }, []);
 
@@ -20,7 +22,7 @@ export default function HomePlantList() {
         <h2 className="sr-only">Plants</h2>
 
         <div className="-mx-px border-l border-gray-200 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
-          {plants.map((plant) => (
+          {plants.map(plant => (
             <div
               key={plant.id}
               className="group relative p-4 border-r border-b border-gray-200 sm:p-6"
@@ -34,7 +36,7 @@ export default function HomePlantList() {
               </div>
               <div className="pt-2 pb-2 text-center">
                 <h3 className="py-1 text-sm font-medium text-gray-900">
-                <Link to={`/plants/${plant.id}`}>
+                  <Link to={`/plants/${plant.id}`}>
                     <span aria-hidden="true" className="absolute inset-0" />
                     {plant.plant_name}
                   </Link>

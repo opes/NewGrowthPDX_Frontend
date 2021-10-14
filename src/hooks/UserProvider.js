@@ -11,7 +11,7 @@ const UserProvider = ({ children }) => {
       try {
         const res = await fetch('https://ngpdx-backend.herokuapp.com/auth/me');
         const json = await res.json();
-        if(!res.ok) throw new Error('login failed!');
+        if (!res.ok) throw new Error('login failed!');
         setUser(json);
       } catch (error) {
         console.log(error.message);
@@ -34,7 +34,7 @@ export const useUser = () => {
 };
 
 UserProvider.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 };
 
 export default UserProvider;

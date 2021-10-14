@@ -8,10 +8,10 @@ export default function PlantBuyerDetail() {
   const { user } = useUser();
   const [plants, setPlants] = useState({});
   const { id } = useParams();
-  const [mailPreview, setMailPreview] = useState('');
+  const [setMailPreview] = useState('');
 
   useEffect(() => {
-    const fetchPlantDetail = async (plantID) => {
+    const fetchPlantDetail = async plantID => {
       const res = await fetch(
         `https://ngpdx-backend.herokuapp.com/api/v1/plants/${plantID}`
       );
@@ -22,7 +22,6 @@ export default function PlantBuyerDetail() {
     };
     fetchPlantDetail(id);
   }, []);
-
 
   const sendEmail = async (plantId, email) => {
     try {
@@ -37,25 +36,24 @@ export default function PlantBuyerDetail() {
             plantId: plantId,
             fromEmail: email
           })
-      });
+        }
+      );
       const json = await res.json();
       return json;
-
     } catch (error) {
       console.log(error.message);
     }
   };
 
   const handleEmail = async () => {
-    const res = await sendEmail(id , user.email)
+    const res = await sendEmail(id, user.email);
 
     setMailPreview(res.mailPreview);
-    window.open(res.mailPreview)
+    window.open(res.mailPreview);
 
-    if(res.mailPreview) return alert("Email sent!")
-    else return alert("Email did not correctly send")
-  }
-
+    if (res.mailPreview) return alert('Email sent!');
+    else return alert('Email did not correctly send');
+  };
 
   return (
     <div className="bg-white">
@@ -66,7 +64,6 @@ export default function PlantBuyerDetail() {
               {plants.plant_name}
             </h1>
           </div>
-
           <section aria-label="information-heading" className="mt-4">
             <h2 id="information-heading" className="sr-only">
               Plant information
@@ -97,7 +94,9 @@ export default function PlantBuyerDetail() {
       <div className="ml-60">
         <button
           type="button"
-          onClick={() => {handleEmail()}}
+          onClick={() => {
+            handleEmail();
+          }}
           className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
         >
           <MailIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
