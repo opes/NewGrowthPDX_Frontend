@@ -1,9 +1,12 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link, useHistory } from 'react-router-dom';
+import { useUser } from '../hooks/UserProvider.js';
 
 export default function PlantDetail() {
   const [plants, setPlants] = useState({});
+  const history = useHistory();
+  const { user } = useUser();
   const { id } = useParams();
 
   useEffect(() => {
@@ -19,10 +22,21 @@ export default function PlantDetail() {
     fetchPlantDetail(id);
   }, []);
 
+  const deletePlant = async (id) => {
+    await fetch(
+      `https://ngpdx-backend.herokuapp.com/api/v1/plants/delete/${id}`,
+      {
+        method: 'DELETE',
+        credentials: 'include',
+        mode: 'cors'
+      }
+    );
+    return history.push('/greenhouse');
+  };
+
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:gap-x-8">
-        {/* Product details */}
         <div className="lg:max-w-lg lg:self-end">
           <div>
             <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
@@ -42,7 +56,7 @@ export default function PlantDetail() {
             </div>
 
             <div className="mt-4 space-y-6">
-              {/* <p className="text-base text-gray-500">{plants.description}</p> */}
+              <p className="text-base text-gray-500">{plants.description}</p>
             </div>
           </section>
         </div>
@@ -56,6 +70,18 @@ export default function PlantDetail() {
             />
           </div>
         </div>
+      </div>
+      <div className="ml-60">
+        <button
+          type="button"
+          onClick={deletePlant}
+          className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+        >
+          delete
+        </button>
+        <Link to={'/greenhouse'} className="text-gray-900 px-4">
+          Go Back
+        </Link>
       </div>
     </div>
   );

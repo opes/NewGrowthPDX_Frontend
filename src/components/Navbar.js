@@ -51,22 +51,21 @@ export default function Navbar() {
                 <div className="hidden lg:ml-6 lg:flex lg:space-x-8">
                   <Link
                     to={'/'}
-                    className="border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                    className="hover:border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     New Growth PDX
                   </Link>
                   {user && (
                     <Link
                       to={'/greenhouse'}
-                      className="border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                      className="hover:border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                     >
                       My Greenhouse
                     </Link>
                   )}
-
                   <Link
-                    to={'/plant'}
-                    className="border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                    to={'/about'}
+                    className="hover:border-green-600 text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
                   >
                     About
                   </Link>
