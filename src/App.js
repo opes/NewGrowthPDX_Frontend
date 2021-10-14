@@ -3,11 +3,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-
 import About from './containers/About';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
-
 import PlantGrid from './containers/PlantGrid';
 import GreenhouseGrid from './containers/GreenhouseGrid';
 import UploadContainer from './containers/UploadContainer';
@@ -15,7 +13,6 @@ import PlantDetail from './components/PlantDetail';
 import PlantBuyerDetail from './components/PlantBuyerDetail';
 
 export default function App() {
-
   return (
     <Router>
       <Navbar />

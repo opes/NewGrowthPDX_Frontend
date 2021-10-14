@@ -22,8 +22,6 @@ export default function GreenhouseList() {
     fetchUserPlants();
   }, []);
 
-
-
   return (
     <div>
       <div className="max-w-7xl mx-auto overflow-hidden sm:px-6 lg:px-8">

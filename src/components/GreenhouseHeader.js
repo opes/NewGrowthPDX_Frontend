@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useUser } from '../hooks/UserProvider.js';
 
-
 const profile = {
   avatar:
     'https://res.cloudinary.com/mountaincloud/image/upload/v1633921006/shot-cropped-1590357847004_s5sqna.png',

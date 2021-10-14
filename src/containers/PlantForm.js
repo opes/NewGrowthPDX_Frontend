@@ -36,8 +36,6 @@ export default function PlantForm() {
         'https://ngpdx-backend.herokuapp.com/api/v1/categories'
       );
       const json = await res.json();
-
-      console.log('****LOOK HERE FOR CATEGORIES*****', json);
       setPlantCategory(json);
     };
     fetchCategories();
@@ -63,7 +61,7 @@ export default function PlantForm() {
     setSelectedCategory(event.target.value);
   };
 
-  const handlePlantSubmission = async (event) => {
+  const handlePlantSubmission = async event => {
     event.preventDefault();
 
     try {
@@ -71,7 +69,7 @@ export default function PlantForm() {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
-        headers: { 'Content-Type':'application/jSON' },
+        headers: { 'Content-Type': 'application/jSON' },
         body: JSON.stringify({
           plant_name: plantName,
           scientific_name: plantSciName,
@@ -80,13 +78,12 @@ export default function PlantForm() {
           category_id: 5,
           on_market: true,
           image: url,
-          users_id: '2',
-         })
-      })
+          users_id: '2'
+        })
+      });
       return history.push('/greenhouse');
-
-    } catch(error) {
-      console.log(error)
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -281,7 +278,7 @@ export default function PlantForm() {
       <div className="pt-5">
         <div className="flex justify-end">
           <Link to="/greenhouse">
-          <div className="flex justify-end">
+            <div className="flex justify-end">
               <button
                 type="button"
                 className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
