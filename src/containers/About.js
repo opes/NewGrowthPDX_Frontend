@@ -2,23 +2,23 @@ const people = [
   {
     name: 'Kyle Mayer',
     role: 'Full-Stack Web Developer',
-    imageUrl: '',
-    twitterUrl: 'https://twitter.com/0xMayer',
+    imageUrl: '/kyle.png',
+    githubUrl: '',
     linkedinUrl: 'https://www.linkedin.com/in/kyle-mayer88/'
   },
   {
     name: 'Derek Hudgins',
     role: 'Full-Stack Web Developer',
-    imageUrl: '',
-    twitterUrl: '#',
+    imageUrl: '/derek.jpeg',
+    githubUrl: '#',
     linkedinUrl: 'https://www.linkedin.com/in/derekhudgins/'
   },
   {
     name: 'Sean Simpson',
     role: 'Full-Stack Web Developer',
     imageUrl: '',
-    twitterUrl: 'https://twitter.com/0xMayer',
-    linkedinUrl: 'https://www.linkedin.com/in/kyle-mayer88/'
+    githubUrl: '',
+    linkedinUrl: 'https://www.linkedin.com/in/'
   }
 ];
 
