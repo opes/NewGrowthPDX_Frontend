@@ -8,6 +8,7 @@ export default function PlantBuyerDetail() {
   const { user } = useUser();
   const [plants, setPlants] = useState({});
   const { id } = useParams();
+  // eslint-disable-next-line
   const [mailPreview, setMailPreview] = useState('');
 
   useEffect(() => {
@@ -21,6 +22,7 @@ export default function PlantBuyerDetail() {
       setPlants(json);
     };
     fetchPlantDetail(id);
+    // eslint-disable-next-line
   }, []);
 
   const sendEmail = async (plantId, email) => {

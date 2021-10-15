@@ -18,6 +18,7 @@ export default function PlantDetail() {
       setPlants(json);
     };
     fetchPlantDetail(id);
+    // eslint-disable-next-line
   }, []);
 
   const deletePlant = async (id) => {
