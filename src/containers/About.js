@@ -14,8 +14,8 @@ const people = [
   {
     name: 'Sean Simpson',
     role: 'Full-Stack Web Developer',
-    imageUrl: '',
-    linkedinUrl: 'https://www.linkedin.com/in/'
+    imageUrl: '/sean.jpeg',
+    linkedinUrl: 'https://www.linkedin.com/in/simpson-sean/'
   }
 ];
 
