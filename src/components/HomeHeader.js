@@ -6,7 +6,7 @@ export default function HomeHeader() {
           Welcome to New Growth PDX
         </h1>
         <p className="mt-4 max-w-xl mx-auto text-base text-gray-500">
-          Discover houseplants to buy/trade in Portland, OR.
+          Discover houseplants to buy/trade in Portland, Oregon
         </p>
       </div>
       <div className="mt-6 relative z-10 border-t border-b border-gray-200 grid items-center"></div>

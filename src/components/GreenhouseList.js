@@ -20,7 +20,7 @@ export default function GreenhouseList() {
       }
     };
     fetchUserPlants();
-  }, []);
+  }, [user.id]);
 
   return (
     <div>
