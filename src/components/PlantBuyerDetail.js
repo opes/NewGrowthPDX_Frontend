@@ -8,7 +8,7 @@ export default function PlantBuyerDetail() {
   const { user } = useUser();
   const [plants, setPlants] = useState({});
   const { id } = useParams();
-  const [setMailPreview] = useState('');
+  const [mailPreview, setMailPreview] = useState('');
 
   useEffect(() => {
     const fetchPlantDetail = async plantID => {
