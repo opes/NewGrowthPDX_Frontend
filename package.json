@@ -23,7 +23,7 @@
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "superagent": "^6.1.0",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
+    "tailwindcss": "^2.2.16",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
