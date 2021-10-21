@@ -9,6 +9,8 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchLogged = async () => {
       try {
+        // Setting a loading state will help prevent unexpected "user is null" errors
+        // when a user is being fetched
         const res = await fetch('https://ngpdx-backend.herokuapp.com/auth/me');
         const json = await res.json();
         if (!res.ok) throw new Error('login failed!');

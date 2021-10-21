@@ -27,6 +27,7 @@ export default function HomePlantList() {
               key={plant.id}
               className="group relative p-4 border-r border-b border-gray-200 sm:p-6"
             >
+              {/* The below could be extracted into a presentational component */}
               <div className="rounded-lg overflow-hidden bg-gray-200 aspect-w-1 aspect-h-1 group-hover:opacity-75">
                 <img
                   src={plant.image}
@@ -41,7 +42,7 @@ export default function HomePlantList() {
                     {plant.plant_name}
                   </Link>
                 </h3>
-                <p className="mb-2 font-medium text-gray-900">${plant.price}</p>
+                <p className="mb-2 font-medium text-gray-900">&dollar;{plant.price}</p>
                 <button
                   type="button"
                   className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"

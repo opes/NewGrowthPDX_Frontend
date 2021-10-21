@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 
+// Consider saving "https://ngpdx-backend.herokuapp.com/api/v1" in your .env for easier reusability
+
 export default function PlantForm() {
   const [image, setImage] = useState('');
   const [url, setUrl] = useState('');
@@ -17,8 +19,8 @@ export default function PlantForm() {
   const uploadImage = () => {
     const data = new FormData();
     data.append('file', image);
-    data.append('upload_preset', 'zbeywvhn');
-    data.append('cloud_name', 'mountaincloud');
+    data.append('upload_preset', 'zbeywvhn'); // Save these values in .env
+    data.append('cloud_name', 'mountaincloud'); // Save these values in .env
     fetch('https://api.cloudinary.com/v1_1/mountaincloud/image/upload', {
       method: 'post',
       body: data

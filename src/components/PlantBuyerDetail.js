@@ -8,7 +8,7 @@ export default function PlantBuyerDetail() {
   const { user } = useUser();
   const [plants, setPlants] = useState({});
   const { id } = useParams();
-  // eslint-disable-next-line
+  // If you're not using mailPreview, why do you need to keep setMailPreview?
   const [mailPreview, setMailPreview] = useState('');
 
   useEffect(() => {
@@ -17,13 +17,11 @@ export default function PlantBuyerDetail() {
         `https://ngpdx-backend.herokuapp.com/api/v1/plants/${plantID}`
       );
       const json = await res.json();
-      console.log(json, 'HERE I AM - plant detail');
 
       setPlants(json);
     };
     fetchPlantDetail(id);
-    // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   const sendEmail = async (plantId, email) => {
     try {
@@ -43,6 +41,7 @@ export default function PlantBuyerDetail() {
       const json = await res.json();
       return json;
     } catch (error) {
+      // TODO: Display something to the user to have them try again?
       console.log(error.message);
     }
   };
@@ -73,7 +72,7 @@ export default function PlantBuyerDetail() {
 
             <div className="flex items-center">
               <p className="text-lg text-gray-900 sm:text-xl">
-                ${plants.price}
+                &dollar;{plants.price}
               </p>
             </div>
 

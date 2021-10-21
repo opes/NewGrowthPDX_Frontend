@@ -12,8 +12,6 @@ export default function Login() {
     event.preventDefault();
     try {
       const body = { email, password };
-      console.log(email, password);
-
       const res = await fetch(
         'https://ngpdx-backend.herokuapp.com/auth/login',
         {
@@ -32,6 +30,7 @@ export default function Login() {
 
       return history.push('/greenhouse');
     } catch (error) {
+      // TODO: Display something to the user to have them try again?
       console.log(error.message);
     }
   };

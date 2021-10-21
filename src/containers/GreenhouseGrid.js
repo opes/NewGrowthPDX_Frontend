@@ -7,7 +7,8 @@ import { useUser } from '../hooks/UserProvider';
 export default function GreenhouseGrid() {
   const history = useHistory();
   const { user } = useUser();
-  console.log(user, 'oooooooooo');
+
+  // You'll likely want to check if the user is currently being loaded
   if (!user) {
     history.push('/login');
     return null;

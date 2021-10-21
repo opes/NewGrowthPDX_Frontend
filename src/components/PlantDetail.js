@@ -13,13 +13,11 @@ export default function PlantDetail() {
         `https://ngpdx-backend.herokuapp.com/api/v1/plants/${plantID}`
       );
       const json = await res.json();
-      console.log(json, 'HERE I AM - plant detail');
 
       setPlants(json);
     };
     fetchPlantDetail(id);
-    // eslint-disable-next-line
-  }, []);
+  }, [id]);
 
   const deletePlant = async (id) => {
     await fetch(`https://ngpdx-backend.herokuapp.com/api/v1/plants/${id}`, {
@@ -47,7 +45,7 @@ export default function PlantDetail() {
 
             <div className="flex items-center">
               <p className="text-lg text-gray-900 sm:text-xl">
-                ${plants.price}
+                &dollar;{plants.price}
               </p>
             </div>
 

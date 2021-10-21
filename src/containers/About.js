@@ -19,6 +19,7 @@ const people = [
   }
 ];
 
+// This is more of a presentational component than a container
 export default function About() {
   return (
     <div>
@@ -39,6 +40,7 @@ export default function About() {
             >
               {people.map(person => (
                 <li key={person.name}>
+                  {/* Everything inside this <li> could be extracted into a smaller presentational component */}
                   <div className="space-y-4">
                     <div className="aspect-w-3 aspect-h-2">
                       <img

@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { Disclosure } from '@headlessui/react';
 import { useUser } from '../hooks/UserProvider.js';
 import { MenuIcon, XIcon } from '@heroicons/react/outline';
@@ -18,7 +17,6 @@ export default function Navbar() {
     });
 
     const json = await res.json();
-    console.log(json);
     setUser(null);
     return history.push('/');
   };

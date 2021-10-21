@@ -13,7 +13,6 @@ export default function SignUp() {
     event.preventDefault();
     try {
       const body = { username, email, password };
-      console.log(username, email, password);
 
       const res = await fetch(
         'https://ngpdx-backend.herokuapp.com/auth/signup',
@@ -30,6 +29,7 @@ export default function SignUp() {
       setUser(json.username, json.id);
       return history.push('/login');
     } catch (error) {
+      // TODO: Display something to the user to have them try again?
       console.log(error.message);
     }
   };

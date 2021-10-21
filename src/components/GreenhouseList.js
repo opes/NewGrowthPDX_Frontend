@@ -9,6 +9,7 @@ export default function GreenhouseList() {
   useEffect(() => {
     const fetchUserPlants = async () => {
       try {
+        // Might be useful to set a loading state here as well to display to the user
         const res = await fetch(
           `https://ngpdx-backend.herokuapp.com/api/v1/greenhouse/${user.id}`
         );
@@ -48,7 +49,7 @@ export default function GreenhouseList() {
                   </Link>
                 </h3>
 
-                <p className="mb-2 font-medium text-gray-900">${plant.price}</p>
+                <p className="mb-2 font-medium text-gray-900">&dollar;{plant.price}</p> {/* Using &dollar; will fix syntax highlighting */}
               </div>
             </div>
           ))}
